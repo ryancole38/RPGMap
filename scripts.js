@@ -2,8 +2,11 @@ class GameBoard {
     constructor(canvas){
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
-        this.xOffset = canvas.getBoundingClientRect().width / 2;
-        this.yOffset = canvas.getBoundingClientRect().height / 2;
+        this.xCenter = canvas.getBoundingClientRect().width / 2;
+        this.yCenter = canvas.getBoundingClientRect().height / 2;
+
+        this.xOffset = 0;
+        this.yOffset = 0;
 
         this.size = 20;
         this.boardUpdateTaskID = -1;
@@ -66,8 +69,8 @@ class GameBoard {
         if(x % 2 == 0) y += this.size;
         x = x * hypotenuse * 2 - (x * (hypotenuse - (0.5 * this.size)));
     
-        x += this.xOffset;
-        y += this.yOffset - this.size;
+        x += this.xCenter + this.xOffset;
+        y += this.yCenter + this.yOffset - this.size;
     
         this.context.beginPath();
         this.context.moveTo(x - (0.5 * this.size), y + this.size);
@@ -112,7 +115,10 @@ class GameBoard {
 
     onWheelScroll(event){
         event.preventDefault();
+        let scaleFactor = (this.size + (event.deltaY * -0.01)) / this.size;
         this.size += event.deltaY * -0.01;
+        this.xOffset *= scaleFactor; //scale to center
+        this.yOffset *= scaleFactor;
         this.drawBoard();
     }
 
