@@ -4,8 +4,14 @@
         <title>RPG Map</title>
         <link rel="stylesheet" href="styles.css">
     </head>
-    <body >
-        <canvas id="screen" height="500" width="1600"></canvas>
+    <body>
+        <canvas class="screen" id="screen" height="500" width="1600"></canvas>
+        <div id="selected-tile">
+            GM mode: <input type="checkbox" id="gm-mode" onchange="changeGmMode()">
+            <p id="tile-coords"></p>
+            <p id="tile-color"></p>
+            <p id="tile-lines"></p>
+        </div>
         <script src="scripts.js"></script>
     </body>
 </html>
