@@ -17,6 +17,9 @@ class GameBoard {
         this.xCenter = canvas.getBoundingClientRect().width / 2;
         this.yCenter = canvas.getBoundingClientRect().height / 2;
 
+        canvas.width = canvas.getBoundingClientRect().width; //this needs to be here because it has two widths.  you need to sync them
+        canvas.height = canvas.getBoundingClientRect().height;
+
         this.showUnsetTiles = false;
 
         this.xOffset = 0;
